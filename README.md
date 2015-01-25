@@ -1,5 +1,9 @@
 # Loopback Examples: Full Stack
 
+> This repo reimplements [Loopback Full Stack Example](https://github.com/strongloop/loopback-example-full-stack/) using React instead of Angular. The React app is located in `client/reapp`. It uses [react-router](https://github.com/rackt/react-router) for routing and [reflux](https://github.com/spoike/refluxjs) implementation of Flux unidirectional data flow.
+
+---
+
 **Note: this example uses `loopback@2.0.0` and `loopback-boot@2.0.0`!**
 
 An example running LoopBack in the browser and server, demonstrating the
