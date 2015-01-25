@@ -7,5 +7,5 @@ module.exports = {
   livereload: process.env.LIVE_RELOAD,
   isDevEnv: isDevEnv,
   indexFile: require.resolve(isDevEnv ?
-    '../client/ngapp/index.html' : '../client/dist/index.html'),
+    '../client/reapp/index.html' : '../client/dist/index.html'),
 };

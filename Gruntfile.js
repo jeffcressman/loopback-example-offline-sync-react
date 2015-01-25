@@ -78,6 +78,15 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
       },
+      react: {
+        files: [
+          '<%= yeoman.app %>/**/*.jsx'
+        ],
+        tasks: ['react'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        },
+      },
       config: {
         files: ['<%= yeoman.app %>/config/*.json'],
         tasks: ['build-config'],
@@ -174,7 +183,12 @@ module.exports = function (grunt) {
       options: {
         cwd: '<%= yeoman.app %>',
         bowerJson: require('./bower.json'),
-        directory: './bower_components' //require('./.bowerrc').directory
+        directory: './bower_components', //require('./.bowerrc').directory
+        overrides: {
+          react: {
+            main: "react-with-addons.js"
+          }
+        }
       },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
@@ -299,6 +313,21 @@ module.exports = function (grunt) {
           src: '*.js',
           dest: '.tmp/concat/scripts'
         }]
+      }
+    },
+
+    // Compile React's JSX files
+    react: {
+      dynamic_mappings: {
+        files: [
+          {
+            expand: true,
+            cwd: 'client/reapp',
+            src: ['**/*.jsx'],
+            dest: '.tmp',
+            ext: '.js'
+          }
+        ]
       }
     },
 
@@ -433,6 +462,7 @@ module.exports = function (grunt) {
       'clean:server',
       'build-lbclient',
       'build-config',
+      'react',
       'wiredep',
       'concurrent:server',
       'autoprefixer',
@@ -460,6 +490,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'build-lbclient',
     'build-config',
+    'react',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
