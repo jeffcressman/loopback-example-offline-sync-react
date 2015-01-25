@@ -1,30 +1,31 @@
 {
   "/": {
-    "controller": "HomeCtrl",
-    "templateUrl": "/views/welcome.html"
+    "name": "home",
+    "handler": "WelcomeView",
+    "default": true
   },
   "/me": {
-    "controller": "UserCtrl",
-    "templateUrl": "/views/user.html"
+    "name": "user",
+    "handler": "UserView"
   },
   "/my/todos/:status": {
-    "controller": "TodoCtrl",
-    "templateUrl": "/views/todos.html"
+    "name": "todoStatus",
+    "handler": "TodoView"
   },
   "/my/todos": {
-    "controller": "TodoCtrl",
-    "templateUrl": "/views/todos.html"
+    "name": "todos",
+    "handler": "TodoView"
   },
   "/login": {
-    "controller": "LoginCtrl",
-    "templateUrl": "/views/login.html"
+    "name": "login",
+    "handler": "LoginView"
   },
   "/register": {
-    "controller": "RegisterCtrl",
-    "templateUrl": "/views/register.html"
+    "name": "register",
+    "handler": "RegisterView"
   },
   "/debug": {
-    "controller": "ChangeCtrl",
-    "templateUrl": "/views/changes.html"
+    "name": "debug",
+    "handler": "ChangeView"
   }
 }

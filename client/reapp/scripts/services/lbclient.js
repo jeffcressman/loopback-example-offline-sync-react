@@ -6,15 +6,7 @@ var client = (function() {
   return require('lbclient');
 })();
 
-/**
- * @ngdoc service
- * @name loopbackExampleFullStackApp.lbclient
- * @description
- * # lbclient
- * Value in the loopbackExampleFullStackApp.
- */
-angular.module('loopbackExampleFullStackApp')
-  .value('Todo', client.models.LocalTodo)
-  .value('RemoteTodo', client.models.Todo)
-  .value('sync', client.sync)
-  .value('network', client.network);
+var Todo = client.models.LocalTodo;
+var RemoteTodo = client.models.Todo;
+var sync = client.sync;
+var network = client.network;
