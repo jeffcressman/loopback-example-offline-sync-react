@@ -57,7 +57,9 @@
               conflict.target = target;
               conflict.manual = new conflict.SourceModel(source || target);
               conflict.changes(function(err, source, target) {
+                source.modelId = getReadableModelId(source.modelId);
                 conflict.sourceChange = source;
+                target.modelId = getReadableModelId(target.modelId);
                 conflict.targetChange = target;
                 $scope.trigger();
               });

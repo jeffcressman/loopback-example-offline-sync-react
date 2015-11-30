@@ -1,3 +1,5 @@
+'use strict';
+
 // TODO(bajtos) Move the bi-di replication to loopback core,
 // add model settings to enable the replication.
 // Example:
@@ -7,9 +9,11 @@
 //      target: 'Todo',
 //      mode: 'push' | 'pull' | 'bidi'
 //    }}}
+var proquint = require('proquint');
+
 module.exports = function(client) {
   var LocalTodo = client.models.LocalTodo;
-  var RemoteTodo = client.models.Todo;
+  var RemoteTodo = client.models.RemoteTodo;
 
   client.network = {
     _isConnected: true,
@@ -23,17 +27,36 @@ module.exports = function(client) {
   };
 
   // setup model replication
+  var since = { push: -1, pull: -1 };
   function sync(cb) {
-    if (client.network.isConnected) {
-      RemoteTodo.replicate(LocalTodo, function() {
-        LocalTodo.replicate(RemoteTodo, cb);
+    LocalTodo.replicate(
+      since.push,
+      RemoteTodo,
+      function pushed(err, conflicts, cps) {
+        since.push = cps;
+        RemoteTodo.replicate(
+          since.pull,
+          LocalTodo,
+          function pulled(err, conflicts, cps) {
+            since.pull = cps;
+            if (cb) cb();
+          });
       });
-    }
   }
 
   // sync local changes if connected
-  LocalTodo.on('changed', sync);
-  LocalTodo.on('deleted', sync);
+  LocalTodo.on('after save', function(ctx, next) {
+    next();
+    sync();
+  });
+  LocalTodo.on('after delete', function(ctx, next) {
+    next();
+    sync();
+  });
 
   client.sync = sync;
+
+  client.getReadableModelId = function(modelId) {
+    return proquint.encode(new Buffer(modelId.substring(0, 8), 'binary'));
+  };
 };

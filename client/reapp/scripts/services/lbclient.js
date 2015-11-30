@@ -7,6 +7,7 @@ var client = (function() {
 })();
 
 var Todo = client.models.LocalTodo;
-var RemoteTodo = client.models.Todo;
+var RemoteTodo = client.models.RemoteTodo;
 var sync = client.sync;
 var network = client.network;
+var getReadableModelId = client.getReadableModelId;

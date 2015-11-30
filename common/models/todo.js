@@ -1,14 +1,9 @@
-var loopback = require('loopback');
+'use strict';
+
 var async = require('async');
 
 module.exports = function(Todo) {
-
   Todo.definition.properties.created.default = Date.now;
-
-  Todo.beforeSave = function(next, model) {
-    if (!model.id) model.id = 't-' + Math.floor(Math.random() * 10000).toString();
-    next();
-  };
 
   Todo.stats = function(filter, cb) {
     var stats = {};
@@ -37,6 +32,10 @@ module.exports = function(Todo) {
         cb(err);
       });
     }
+  };
+
+  Todo.handleChangeError = function(err) {
+    console.warn('Cannot update change records for Todo:', err);
   };
 
   Todo.remoteMethod('stats', {
