@@ -44,8 +44,14 @@
       // sync the initial data
       sync(onChange);
 
-      Todo.on('changed', onChange);
-      Todo.on('deleted', onChange);
+      Todo.observe('after save', function(ctx, next) {
+        next();
+        onChange();
+      });
+      Todo.observe('after delete', function(ctx, next) {
+        next();
+        onChange();
+      });
 
       Todo.on('conflicts', function(conflicts) {
         $scope.localConflicts = conflicts;
@@ -127,23 +133,15 @@
     },
 
     onResolveUsingSource: function(conflict) {
-      conflict.resolve(refreshConflicts);
+      conflict.resolveUsingSource(refreshConflicts);
     },
 
     onResolveUsingTarget: function(conflict) {
-      if(conflict.targetChange.type() === 'delete') {
-        conflict.SourceModel.deleteById(conflict.modelId, refreshConflicts);
-      } else {
-        var m = new conflict.SourceModel(conflict.target);
-        m.save(refreshConflicts);
-      }
+      conflict.resolveUsingTarget(refreshConflicts);
     },
 
     onResolveManually: function(conflict) {
-      conflict.manual.save(function(err) {
-        if(err) return errorCallback(err);
-        conflict.resolve(refreshConflicts);
-      });
+      conflict.resolveManually(conflict.manual, refreshConflicts);
     }
 
   });
