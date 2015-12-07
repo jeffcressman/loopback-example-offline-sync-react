@@ -3,7 +3,6 @@
 var async = require('async');
 
 module.exports = function(Todo) {
-  Todo.definition.properties.created.default = Date.now;
 
   Todo.stats = function(filter, cb) {
     var stats = {};

@@ -1,22 +1,29 @@
 {
   "name": "Todo",
   "base": "PersistedModel",
-  "strict": "throw",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "persisteUndefinedAsNull": true,
   "trackChanges": true,
   "properties": {
     "id": {
-      "id": true,
       "type": "string",
+      "id": true,
       "defaultFn": "guid"
     },
-    "title": "string",
+    "title": {
+      "type": "string"
+    },
     "completed": {
       "type": "boolean",
       "default": false
-    },
-    "created": {
-      "type": "number"
     }
-  }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }

@@ -36,6 +36,10 @@ following features:
 
 9. open `http://localhost:3000` - point a browser at the running application.
 
+Run the autoudpate script to migrate the Checkpoint model.
+
+`node bin/autoudpate.js`
+
 ## Project layout
 
 The project is composed from multiple components.
@@ -130,41 +134,6 @@ The instructions assume the name of the new model is 'MyModel'.
       },
       "RemoteMyModel": {
         "dataSource": "remote"
-      }
-    }
-    ```
-
- 6. Register the local model with Angular's injector in
-  `ngapp/scripts/services/lbclient.js`:
-
-    ```js
-      .value('MyModel', app.models.LocalMyModel)
-    ```
-
-### Create a new Angular route
-
-Since the full-stack example project shares the routes between the client and
-the server, the new route cannot be added using the yeoman generator.
-
- 1. (Optional) Create a new angular controller using yeoman, for example,
-
-    ```sh
-    $ yo angular:controller MyModel
-    ```
-
- 2. (Optional) Create a new angular view using yeoman, for example,
-
-    ```sh
-    $ yo angular:view models
-    ```
-
- 3. Add a route entry to `ngapp/config/routes.json`, for example,
-
-    ```json
-    {
-      "/models": {
-        "controller": "MymodelCtrl",
-        "templateUrl": "/views/models.html"
       }
     }
     ```

@@ -1,0 +1,15 @@
+{
+  "name": "Todo-Change",
+  "base": "Change",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "schema": "public",
+    "table": "todo-change"
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

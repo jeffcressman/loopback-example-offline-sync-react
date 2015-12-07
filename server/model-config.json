@@ -1,11 +1,25 @@
 {
   "_meta": {
-    "sources": ["../common/models"]
+    "sources": [
+      "../common/models"
+    ]
   },
   "Todo": {
-    "dataSource": "db"
+    "dataSource": "postgresDs",
+    "$promise": {},
+    "$resolved": true
   },
   "user": {
-    "dataSource": "db"
+    "dataSource": "postgresDs",
+    "$promise": {},
+    "$resolved": true
+  },
+  "Todo-Change": {
+    "dataSource": "postgresDs",
+    "public": true
+  },
+  "Checkpoint": {
+    "dataSource": "postgresDs",
+    "public": true
   }
 }

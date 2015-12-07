@@ -1,6 +1,15 @@
 {
   "db": {
+    "name": "db",
     "connector": "memory",
     "defaultForType": "db"
+  },
+  "postgresDs": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "loopback_example_offline_sync_react",
+    "name": "postgresDs",
+    "user": "postgres",
+    "connector": "postgresql"
   }
 }

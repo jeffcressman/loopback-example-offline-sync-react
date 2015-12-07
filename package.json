@@ -72,9 +72,10 @@
     "cors": "^2.7.1",
     "loopback": "^2.22.0",
     "loopback-boot": "^2.12.1",
-    "loopback-connector-mongodb": "^1.4.1",
-    "loopback-datasource-juggler": "^2.0.0",
     "loopback-component-explorer": "^2.1.0",
+    "loopback-connector-mongodb": "^1.4.1",
+    "loopback-connector-postgresql": "^2.4.0",
+    "loopback-datasource-juggler": "^2.0.0",
     "proquint": "0.0.1",
     "serve-static": "^1.10.0"
   },

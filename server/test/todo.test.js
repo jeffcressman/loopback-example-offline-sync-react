@@ -34,15 +34,13 @@ describe('Todo', function() {
     lt.describe.whenCalledRemotely('POST', '/api/Todos', {
       id: '123',
       title: 'Sample',
-      completed: true,
-      created: 1024
+      completed: true
     }, function() {
 
       it('should respond with given todo', function() {
         assert.equal(this.res.body.id, 123);
         assert.equal(this.res.body.title, 'Sample');
         assert.equal(this.res.body.completed, true);
-        assert.equal(this.res.body.created, 1024);
       });
 
       // Find todo in the list of todos

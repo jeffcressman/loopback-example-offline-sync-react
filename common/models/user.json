@@ -1,18 +1,25 @@
 {
   "name": "user",
   "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {
     "id": {
-      "id": true,
+      "type": "string",
+      "id": true
+    },
+    "title": {
       "type": "string"
     },
-    "title": "string",
     "completed": {
       "type": "boolean",
       "default": false
-    },
-    "created": {
-      "type": "number"
     }
-  }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
 }
