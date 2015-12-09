@@ -4,13 +4,17 @@
 
 ---
 
-**Note: This example uses `loopback@2.0.0` and `loopback-boot@2.0.0`!**
-
 An example running LoopBack in the browser and server, demonstrating the
 following features:
 
  - offline data access and synchronization
- - routes shared between the AngularJS app and the HTTP server
+
+## Prerequisites
+
+* Install StrongLoop cli `npm install -g strongloop`
+* Install Node v5.0.0 via nvm
+  * `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash`
+  * nvm install 5.0.0
 
 ## Install and Run
 
@@ -21,24 +25,27 @@ following features:
 
 2. `cd loopback-example-offline-sync-react`
 
-3. `npm install` - install the root package dependencies.
+3. `nvm use` - select version of Node specified in `.nvmrc`
 
-4. `npm install grunt-cli -g` - skip if you have Grunt CLI already installed.
+4. `npm install` - install the root package dependencies.
 
-5. `npm install bower -g` - skip if you already have Bower installed.
+5. `npm install grunt-cli -g` - skip if you have Grunt CLI already installed.
 
-6. `bower install` - install front-end scripts
+6. `npm install bower -g` - skip if you already have Bower installed.
 
-7. `mongod` - make sure mongodb is running if you want to run with
-`NODE_ENV=production`.
+7. `bower install` - install front-end scripts
 
-8. `grunt serve` - build and run the entire project in development mode.
+8. Set a Postgres database as per defined in `server/datasource.json`
 
-9. open `http://localhost:3000` - point a browser at the running application.
+9. Run `slc arc` and migrate the Todo and Todo-Change models
 
-Run the autoudpate script to migrate the Checkpoint model.
+10. Run the autoudpate script to migrate the Checkpoint model
+    * `node bin/autoudpate.js`
 
-`node bin/autoudpate.js`
+11. `grunt serve` - build and run the entire project in development mode.
+
+12. open `http://localhost:3000` - point a browser at the running application.
+
 
 ## Project layout
 
@@ -61,10 +68,9 @@ The project is composed from multiple components.
 
 ## Build
 
-This project uses [Grunt](http://gruntjs.com) for the build, since that's what
-`yo angular` creates.
+This project uses [Grunt](http://gruntjs.com) for the build.
 
-There are three major changes from the generic Gruntfile required for this
+There are two major changes from the generic Gruntfile required for this
 full-stack example:
 
  - `grunt serve` uses the `server/` component instead of `grunt connect`.
@@ -72,11 +78,6 @@ full-stack example:
  - `lbclient` component provides a custom build script (`lbclient/build.js`)
    which runs `browserify` to produce a single js file to be used in the
    browser. The Gruntfile contains a custom task to run this build.
-
- - The definition of Angular routes is kept in a standalone JSON file
-   that is used by the `server/` component too. To make this JSON file
-   available in the browser, there is a custom task that builds
-   `ngapp/config/bundle.js`.
 
 ### Targets
 
